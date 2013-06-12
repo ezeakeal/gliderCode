@@ -1,0 +1,37 @@
+<html><head><title>SL4A API Help -MediaRecorderFacade</title></head>
+<body>
+<h1>SL4A API Help -MediaRecorderFacade</h1>
+<a href="index.html">index</a><br>
+A facade for recording media.
+ 
+ Guidance notes: Use e.g. '/sdcard/file.ext' for your media destination file. A file extension of
+ mpg will use the default settings for format and codec (often h263 which won't work with common
+ PC media players). A file extension of mp4 or 3gp will use the appropriate format with the (more
+ common) h264 codec. A video player such as QQPlayer (from the android market) plays both codecs
+ and uses the composition matrix (embedded in the video file) to correct for image rotation. Many
+ PC based media players ignore this matrix. Standard video sizes may be specified.
+<br>@author Felix Arends (felix.arends@gmail.com)
+<br>@author Damon Kohler (damonkohler@gmail.com)
+<br>@author John Karwatzki (jokar49@gmail.com)
+<table border=1>
+<tr><td><a name="recorderCaptureVideo"/><b>recorderCaptureVideo</b></td><td>Records video (and optionally audio) from the camera and saves it to the given location. <br>Duration specifies the maximum duration of the recording session. <br>If duration is not provided this method will return immediately and the recording will only be stopped <br>when recorderStop is called or when a scripts exits. <br>Otherwise it will block for the time period equal to the duration argument.
+<br><b>targetPath (String)</b> 
+<br><b>duration (Integer)</b>  (optional)
+<br><b>recordAudio (Boolean)</b>  (default=true)
+</td></tr>
+<tr><td><a name="recorderStartMicrophone"/><b>recorderStartMicrophone</b></td><td>Records audio from the microphone and saves it to the given location.
+<br><b>targetPath (String)</b> 
+</td></tr>
+<tr><td><a name="recorderStartVideo"/><b>recorderStartVideo</b></td><td>Records video from the camera and saves it to the given location. <br>Duration specifies the maximum duration of the recording session. <br>If duration is 0 this method will return and the recording will only be stopped <br>when recorderStop is called or when a scripts exits. <br>Otherwise it will block for the time period equal to the duration argument.<br>videoSize: 0=160x120, 1=320x240, 2=352x288, 3=640x480, 4=800x480.
+<br><b>targetPath (String)</b> 
+<br><b>duration (Integer)</b>  (default=0)
+<br><b>videoSize (Integer)</b>  (default=1)
+</td></tr>
+<tr><td><a name="recorderStop"/><b>recorderStop</b></td><td>Stops a previously started recording.
+</td></tr>
+<tr><td><a name="startInteractiveVideoRecording"/><b>startInteractiveVideoRecording</b></td><td>Starts the video capture application to record a video and saves it to the specified path.
+<br><b>path (String)</b> 
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

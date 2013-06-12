@@ -1,0 +1,43 @@
+<html><head><title>SL4A API Help -SmsFacade</title></head>
+<body>
+<h1>SL4A API Help -SmsFacade</h1>
+<a href="index.html">index</a><br>
+Provides access to SMS related functionality.
+<br>@author MeanEYE.rcf (meaneye.rcf@gmail.com)
+<table border=1>
+<tr><td><a name="smsDeleteMessage"/><b>smsDeleteMessage</b></td><td>Deletes a message.
+<br><b>id (Integer)</b> 
+<br><b>returns: (Boolean)</b> True if the message was deleted
+</td></tr>
+<tr><td><a name="smsGetAttributes"/><b>smsGetAttributes</b></td><td>Returns a List of all possible message attributes.
+</td></tr>
+<tr><td><a name="smsGetMessageById"/><b>smsGetMessageById</b></td><td>Returns message attributes.
+<br><b>id (Integer)</b> message ID
+<br><b>attributes (JSONArray)</b>  (optional)
+</td></tr>
+<tr><td><a name="smsGetMessageCount"/><b>smsGetMessageCount</b></td><td>Returns the number of messages.
+<br><b>unreadOnly (Boolean)</b> 
+<br><b>folder (String)</b>  (default=inbox)
+</td></tr>
+<tr><td><a name="smsGetMessageIds"/><b>smsGetMessageIds</b></td><td>Returns a List of all message IDs.
+<br><b>unreadOnly (Boolean)</b> 
+<br><b>folder (String)</b>  (default=inbox)
+</td></tr>
+<tr><td><a name="smsGetMessages"/><b>smsGetMessages</b></td><td>Returns a List of all messages.
+<br><b>unreadOnly (Boolean)</b> 
+<br><b>folder (String)</b>  (default=inbox)
+<br><b>attributes (JSONArray)</b>  (optional)
+<br><b>returns: (List)</b> a List of messages as Maps
+</td></tr>
+<tr><td><a name="smsMarkMessageRead"/><b>smsMarkMessageRead</b></td><td>Marks messages as read.
+<br><b>ids (JSONArray)</b> List of message IDs to mark as read.
+<br><b>read (Boolean)</b> 
+<br><b>returns: (Integer)</b> number of messages marked read
+</td></tr>
+<tr><td><a name="smsSend"/><b>smsSend</b></td><td>Sends an SMS.
+<br><b>destinationAddress (String)</b> typically a phone number
+<br><b>text (String)</b> 
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

@@ -1,0 +1,66 @@
+<html><head><title>SL4A API Help -PhoneFacade</title></head>
+<body>
+<h1>SL4A API Help -PhoneFacade</h1>
+<a href="index.html">index</a><br>
+Exposes TelephonyManager functionality.
+<br>@author Damon Kohler (damonkohler@gmail.com)
+<br>@author Felix Arends (felix.arends@gmail.com)
+<table border=1>
+<tr><td><a name="checkNetworkRoaming"/><b>checkNetworkRoaming</b></td><td>Returns true if the device is considered roaming on the current network, for GSM purposes.
+</td></tr>
+<tr><td><a name="getCellLocation"/><b>getCellLocation</b></td><td>Returns the current cell location.
+</td></tr>
+<tr><td><a name="getDeviceId"/><b>getDeviceId</b></td><td>Returns the unique device ID, for example, the IMEI for GSM and the MEID for CDMA phones. Return null if device ID is not available.
+</td></tr>
+<tr><td><a name="getDeviceSoftwareVersion"/><b>getDeviceSoftwareVersion</b></td><td>Returns the software version number for the device, for example, the IMEI/SV for GSM phones. Return null if the software version is not available.
+</td></tr>
+<tr><td><a name="getLine1Number"/><b>getLine1Number</b></td><td>Returns the phone number string for line 1, for example, the MSISDN for a GSM phone. Return null if it is unavailable.
+</td></tr>
+<tr><td><a name="getNeighboringCellInfo"/><b>getNeighboringCellInfo</b></td><td>Returns the neighboring cell information of the device.
+</td></tr>
+<tr><td><a name="getNetworkOperator"/><b>getNetworkOperator</b></td><td>Returns the numeric name (MCC+MNC) of current registered operator.
+</td></tr>
+<tr><td><a name="getNetworkOperatorName"/><b>getNetworkOperatorName</b></td><td>Returns the alphabetic name of current registered operator.
+</td></tr>
+<tr><td><a name="getNetworkType"/><b>getNetworkType</b></td><td>Returns a the radio technology (network type) currently in use on the device.
+</td></tr>
+<tr><td><a name="getPhoneType"/><b>getPhoneType</b></td><td>Returns the device phone type.
+</td></tr>
+<tr><td><a name="getSimCountryIso"/><b>getSimCountryIso</b></td><td>Returns the ISO country code equivalent for the SIM provider\'s country code.
+</td></tr>
+<tr><td><a name="getSimOperator"/><b>getSimOperator</b></td><td>Returns the MCC+MNC (mobile country code + mobile network code) of the provider of the SIM. 5 or 6 decimal digits.
+</td></tr>
+<tr><td><a name="getSimOperatorName"/><b>getSimOperatorName</b></td><td>Returns the Service Provider Name (SPN).
+</td></tr>
+<tr><td><a name="getSimSerialNumber"/><b>getSimSerialNumber</b></td><td>Returns the serial number of the SIM, if applicable. Return null if it is unavailable.
+</td></tr>
+<tr><td><a name="getSimState"/><b>getSimState</b></td><td>Returns the state of the device SIM card.
+</td></tr>
+<tr><td><a name="getSubscriberId"/><b>getSubscriberId</b></td><td>Returns the unique subscriber ID, for example, the IMSI for a GSM phone. Return null if it is unavailable.
+</td></tr>
+<tr><td><a name="getVoiceMailAlphaTag"/><b>getVoiceMailAlphaTag</b></td><td>Retrieves the alphabetic identifier associated with the voice mail number.
+</td></tr>
+<tr><td><a name="getVoiceMailNumber"/><b>getVoiceMailNumber</b></td><td>Returns the voice mail number. Return null if it is unavailable.
+</td></tr>
+<tr><td><a name="phoneCall"/><b>phoneCall</b></td><td>Calls a contact/phone number by URI.
+<br><b>uri (String)</b> 
+</td></tr>
+<tr><td><a name="phoneCallNumber"/><b>phoneCallNumber</b></td><td>Calls a phone number.
+<br><b>phone number (String)</b> 
+</td></tr>
+<tr><td><a name="phoneDial"/><b>phoneDial</b></td><td>Dials a contact/phone number by URI.
+<br><b>uri (String)</b> 
+</td></tr>
+<tr><td><a name="phoneDialNumber"/><b>phoneDialNumber</b></td><td>Dials a phone number.
+<br><b>phone number (String)</b> 
+</td></tr>
+<tr><td><a name="readPhoneState"/><b>readPhoneState</b></td><td>Returns the current phone state and incoming number.
+<br><b>returns: (Bundle)</b> A Map of \"state\" and \"incomingNumber\"
+</td></tr>
+<tr><td><a name="startTrackingPhoneState"/><b>startTrackingPhoneState</b></td><td>Starts tracking phone state.
+</td></tr>
+<tr><td><a name="stopTrackingPhoneState"/><b>stopTrackingPhoneState</b></td><td>Stops tracking phone state.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

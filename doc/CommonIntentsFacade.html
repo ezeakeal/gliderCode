@@ -1,0 +1,34 @@
+<html><head><title>SL4A API Help -CommonIntentsFacade</title></head>
+<body>
+<h1>SL4A API Help -CommonIntentsFacade</h1>
+<a href="index.html">index</a><br>
+A selection of commonly used intents. <br>
+ <br>
+ These can be used to trigger some common tasks.
+<table border=1>
+<tr><td><a name="pick"/><b>pick</b></td><td>Display content to be picked by URI (e.g. contacts)
+<br><b>uri (String)</b> 
+<br><b>returns: (Intent)</b> A map of result values.
+</td></tr>
+<tr><td><a name="scanBarcode"/><b>scanBarcode</b></td><td>Starts the barcode scanner.
+<br><b>returns: (Intent)</b> A Map representation of the result Intent.
+</td></tr>
+<tr><td><a name="search"/><b>search</b></td><td>Starts a search for the given query.
+<br><b>query (String)</b> 
+</td></tr>
+<tr><td><a name="view"/><b>view</b></td><td>Start activity with view action by URI (i.e. browser, contacts, etc.).
+<br><b>uri (String)</b> 
+<br><b>type (String)</b> MIME type/subtype of the URI (optional)
+<br><b>extras (JSONObject)</b> a Map of extras to add to the Intent (optional)
+</td></tr>
+<tr><td><a name="viewContacts"/><b>viewContacts</b></td><td>Opens the list of contacts.
+</td></tr>
+<tr><td><a name="viewHtml"/><b>viewHtml</b></td><td>Opens the browser to display a local HTML file.
+<br><b>path (String)</b> the path to the HTML file
+</td></tr>
+<tr><td><a name="viewMap"/><b>viewMap</b></td><td>Opens a map search for query (e.g. pizza, 123 My Street).
+<br><b>query, e.g. pizza, 123 My Street (String)</b> 
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

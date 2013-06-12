@@ -1,0 +1,69 @@
+<html><head><title>SL4A API Help -LocationFacade</title></head>
+<body>
+<h1>SL4A API Help -LocationFacade</h1>
+<a href="index.html">index</a><br>
+This facade exposes the LocationManager related functionality.<br>
+ <br>
+ <b>Overview</b><br>
+ Once activated by 'startLocating' the LocationFacade attempts to return location data collected
+ via GPS or the cell network. If neither are available the last known location may be retrieved.
+ If both are available the format of the returned data is:<br>
+ {u'network': {u'altitude': 0, u'provider': u'network', u'longitude': -0.38509020000000002,
+ u'time': 1297079691231L, u'latitude': 52.410557300000001, u'speed': 0, u'accuracy': 75}, u'gps':
+ {u'altitude': 51, u'provider': u'gps', u'longitude': -0.38537094593048096, u'time':
+ 1297079709000L, u'latitude': 52.41076922416687, u'speed': 0, u'accuracy': 24}}<br>
+ If neither are available {} is returned. <br>
+ Example (python):<br>
+ 
+ <pre>
+ import android, time
+ droid = android.Android()
+ droid.startLocating()
+ time.sleep(15)
+ loc = droid.readLocation().result
+ if loc = {}:
+   loc = getLastKnownLocation().result
+ if loc != {}:
+   try:
+     n = loc['gps']
+   except KeyError:
+     n = loc['network'] 
+   la = n['latitude'] 
+   lo = n['longitude']
+   address = droid.geocode(la, lo).result
+ droid.stopLocating()
+ </pre>
+ 
+ The address format is:<br>
+ [{u'thoroughfare': u'Some Street', u'locality': u'Some Town', u'sub_admin_area': u'Some Borough',
+ u'admin_area': u'Some City', u'feature_name': u'House Numbers', u'country_code': u'GB',
+ u'country_name': u'United Kingdom', u'postal_code': u'ST1 1'}]
+<br>@author Damon Kohler (damonkohler@gmail.com)
+<br>@author Felix Arends (felix.arends@gmail.com)
+<table border=1>
+<tr><td><a name="geocode"/><b>geocode</b></td><td>Returns a list of addresses for the given latitude and longitude.
+<br><b>latitude (Double)</b> 
+<br><b>longitude (Double)</b> 
+<br><b>maxResults (Integer)</b> maximum number of results (default=1)
+<br><b>returns: (List)</b> A list of addresses.
+</td></tr>
+<tr><td><a name="getLastKnownLocation"/><b>getLastKnownLocation</b></td><td>Returns the last known location of the device.
+<br><b>returns: (Map)</b> A map of location information by provider.
+</td></tr>
+<tr><td><a name="locationProviderEnabled"/><b>locationProviderEnabled</b></td><td>Ask if provider is enabled
+<br><b>provider (String)</b> Name of location provider
+</td></tr>
+<tr><td><a name="locationProviders"/><b>locationProviders</b></td><td>Returns availables providers on the phone
+</td></tr>
+<tr><td><a name="readLocation"/><b>readLocation</b></td><td>Returns the current location as indicated by all available providers.
+<br><b>returns: (Map)</b> A map of location information by provider.
+</td></tr>
+<tr><td><a name="startLocating"/><b>startLocating</b></td><td>Starts collecting location data.
+<br><b>minDistance (Integer)</b> minimum time between updates in milliseconds (default=60000)
+<br><b>minUpdateDistance (Integer)</b> minimum distance between updates in meters (default=30)
+</td></tr>
+<tr><td><a name="stopLocating"/><b>stopLocating</b></td><td>Stops collecting location data.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

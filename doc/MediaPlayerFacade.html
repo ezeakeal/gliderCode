@@ -1,0 +1,88 @@
+<html><head><title>SL4A API Help -MediaPlayerFacade</title></head>
+<body>
+<h1>SL4A API Help -MediaPlayerFacade</h1>
+<a href="index.html">index</a><br>
+This facade exposes basic mediaPlayer functionality.
+ 
+ <br>
+ <br>
+ <b>Usage Notes:</b><br>
+ mediaPlayerFacade maintains a list of media streams, identified by a user supplied tag. If the
+ tag is null or blank, this tag defaults to "default"<br>
+ Basic operation is: mediaPlayOpen("file:///sdcard/MP3/sample.mp3","mytag",true)<br>
+ This will look for a media file at /sdcard/MP3/sample.mp3. Other urls should work. If the file
+ exists and is playable, this will return a true otherwise it will return a false.
+ 
+ <br>
+ If play=true, then the media file will play immediately, otherwise it will wait for a
+ <a href="#mediaPlayStart">mediaPlayerStart</a> command.
+ 
+ <br>
+ When done with the resource, use <a href="#mediaPlayClose">mediaPlayClose</a>
+ 
+ <br>
+ You can get information about the loaded media with <a href="#mediaPlayInfo">mediaPlayInfo</a> This
+ returns a map with the following elements:
+ <ul>
+ <li>"tag" - user supplied tag identifying this mediaPlayer.
+ <li>"loaded" - true if loaded, false if not. If false, no other elements are returned.
+ <li>"duration" - length of the media in milliseconds.
+ <li>"position" - current position of playback in milliseconds. Controlled by
+ <a href="#mediaPlaySeek">mediaPlaySeek</a>
+ <li>"isplaying" - shows whether media is playing. Controlled by <a href="#mediaPlayPause">mediaPlayPause</a> and <a href="#mediaPlayStart">mediaPlayStart</a>
+ <li>"url" - the url used to open this media.
+ <li>"looping" - whether media will loop. Controlled by <a href="#mediaPlaySetLooping">mediaPlaySetLooping</a>
+ </ul>
+ <br>
+ You can use <a href="#mediaPlayList">mediaPlayList</a> to get a list of the loaded tags. <br>
+ <a href="#mediaIsPlaying">mediaIsPlaying</a> will return true if the media is playing.<br>
+ 
+ <b>Events:</b><br>
+ A playing media will throw a <b>"media"</b> event on completion.
+ 
+ NB: In remote mode, a media file will continue playing after the script has finished unless an
+ explicit <a href="#mediaPlayClose">mediaPlayClose</a> event is called.
+<br>@author Robbie Matthews (rjmatthews62@gmail.com)
+<table border=1>
+<tr><td><a name="mediaIsPlaying"/><b>mediaIsPlaying</b></td><td>Checks if media file is playing.
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (boolean)</b> true if playing
+</td></tr>
+<tr><td><a name="mediaPlay"/><b>mediaPlay</b></td><td>Open a media file
+<br><b>url (String)</b> url of media resource
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>play (Boolean)</b> start playing immediately (default=true)
+<br><b>returns: (boolean)</b> true if play successful
+</td></tr>
+<tr><td><a name="mediaPlayClose"/><b>mediaPlayClose</b></td><td>Close media file
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (boolean)</b> true if successful
+</td></tr>
+<tr><td><a name="mediaPlayInfo"/><b>mediaPlayInfo</b></td><td>Information on current media
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (Map)</b> Media Information
+</td></tr>
+<tr><td><a name="mediaPlayList"/><b>mediaPlayList</b></td><td>Lists currently loaded media
+<br><b>returns: (Set)</b> List of Media Tags
+</td></tr>
+<tr><td><a name="mediaPlayPause"/><b>mediaPlayPause</b></td><td>pause playing media file
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (boolean)</b> true if successful
+</td></tr>
+<tr><td><a name="mediaPlaySeek"/><b>mediaPlaySeek</b></td><td>Seek To Position
+<br><b>msec (Integer)</b> Position in millseconds
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (int)</b> New Position (in ms)
+</td></tr>
+<tr><td><a name="mediaPlaySetLooping"/><b>mediaPlaySetLooping</b></td><td>Set Looping
+<br><b>enabled (Boolean)</b>  (default=true)
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (boolean)</b> True if successful
+</td></tr>
+<tr><td><a name="mediaPlayStart"/><b>mediaPlayStart</b></td><td>start playing media file
+<br><b>tag (String)</b> string identifying resource (default=default)
+<br><b>returns: (boolean)</b> true if successful
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

@@ -1,0 +1,35 @@
+<html><head><title>SL4A API Help -PreferencesFacade</title></head>
+<body>
+<h1>SL4A API Help -PreferencesFacade</h1>
+<a href="index.html">index</a><br>
+This facade allows access to the Preferences interface.
+ 
+ <br>
+ <b>Notes:</b> <br>
+ <b>filename</b> - Filename indicates which preference file to refer to. If no filename is
+ supplied (the default) then the SharedPreferences uses is the default for the SL4A application.<br>
+ <b>prefPutValue</b> - uses "MODE_PRIVATE" when writing to preferences. Save values to the default
+ shared preferences is explicitly disallowed.<br>
+ <br>
+ See <a
+ href=http://developer.android.com/reference/java/util/prefs/Preferences.html>Preferences</a> and
+ <a href=http://developer.android.com/guide/topics/data/data-storage.html#pref>Shared
+ Preferences</a> in the android documentation on how preferences work.
+<br>@author Robbie Matthews (rjmatthews62@gmail.com)
+<table border=1>
+<tr><td><a name="prefGetAll"/><b>prefGetAll</b></td><td>Get list of Shared Preference Values
+<br><b>filename (String)</b> Desired preferences file. If not defined, uses the default Shared Preferences. (optional)
+<br><b>returns: (Map)</b> Map of key,value
+</td></tr>
+<tr><td><a name="prefGetValue"/><b>prefGetValue</b></td><td>Read a value from shared preferences
+<br><b>key (String)</b> 
+<br><b>filename (String)</b> Desired preferences file. If not defined, uses the default Shared Preferences. (optional)
+</td></tr>
+<tr><td><a name="prefPutValue"/><b>prefPutValue</b></td><td>Write a value to shared preferences
+<br><b>key (String)</b> 
+<br><b>value (Object)</b> 
+<br><b>filename (String)</b> Desired preferences file. If not defined, uses the default Shared Preferences. (optional)
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

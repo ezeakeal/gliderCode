@@ -1,0 +1,138 @@
+<html><head><title>SL4A API Help -AndroidFacade</title></head>
+<body>
+<h1>SL4A API Help -AndroidFacade</h1>
+<a href="index.html">index</a><br>
+Some general purpose Android routines.<br>
+ <h2>Intents</h2> Intents are returned as a map, in the following form:<br>
+ <ul>
+ <li><b>action</b> - action.
+ <li><b>data</b> - url
+ <li><b>type</b> - mime type
+ <li><b>packagename</b> - name of package. If used, requires classname to be useful (optional)
+ <li><b>classname</b> - name of class. If used, requires packagename to be useful (optional)
+ <li><b>categories</b> - list of categories
+ <li><b>extras</b> - map of extras
+ <li><b>flags</b> - integer flags.
+ </ul>
+ <br>
+ An intent can be built using the <a href="#makeIntent">makeIntent</a> call, but can also be constructed exterally.
+<table border=1>
+<tr><td><a name="environment"/><b>environment</b></td><td>A map of various useful environment details
+<br>Map returned:
+ 
+ <pre>
+   TZ = Timezone
+     id = Timezone ID
+     display = Timezone display name
+     offset = Offset from UTC (in ms)
+   SDK = SDK Version
+   download = default download path
+   appcache = Location of application cache 
+   sdcard = Space on sdcard
+     availblocks = Available blocks
+     blockcount = Total Blocks
+     blocksize = size of block.
+ </pre>
+</td></tr>
+<tr><td><a name="getClipboard"/><b>getClipboard</b></td><td>Read text from the clipboard.
+<br><b>returns: (String)</b> The text in the clipboard.
+</td></tr>
+<tr><td><a name="getConstants"/><b>getConstants</b></td><td>Get list of constants (static final fields) for a class
+<br><b>classname (String)</b> Class to get constants from
+</td></tr>
+<tr><td><a name="getInput"/><b>getInput</b></td><td>Queries the user for a text input.
+<br><b>title (String)</b> title of the input box (default=SL4A Input)
+<br><b>message (String)</b> message to display above the input box (default=Please enter value:)
+<br><i>Deprecated in r3. Use dialogGetInput instead.</i>
+</td></tr>
+<tr><td><a name="getIntent"/><b>getIntent</b></td><td>Returns the intent that launched the script.
+</td></tr>
+<tr><td><a name="getPackageVersion"/><b>getPackageVersion</b></td><td>Returns package version name.
+<br><b>packageName (String)</b> 
+</td></tr>
+<tr><td><a name="getPackageVersionCode"/><b>getPackageVersionCode</b></td><td>Returns package version code.
+<br><b>packageName (String)</b> 
+</td></tr>
+<tr><td><a name="getPassword"/><b>getPassword</b></td><td>Queries the user for a password.
+<br><b>title (String)</b> title of the input box (default=SL4A Password Input)
+<br><b>message (String)</b> message to display above the input box (default=Please enter password:)
+<br><i>Deprecated in r3. Use dialogGetPassword instead.</i>
+</td></tr>
+<tr><td><a name="log"/><b>log</b></td><td>Writes message to logcat.
+<br><b>message (String)</b> 
+</td></tr>
+<tr><td><a name="makeIntent"/><b>makeIntent</b></td><td>Create an Intent.
+<br><b>action (String)</b> 
+<br><b>uri (String)</b>  (optional)
+<br><b>type (String)</b> MIME type/subtype of the URI (optional)
+<br><b>extras (JSONObject)</b> a Map of extras to add to the Intent (optional)
+<br><b>categories (JSONArray)</b> a List of categories to add to the Intent (optional)
+<br><b>packagename (String)</b> name of package. If used, requires classname to be useful (optional)
+<br><b>classname (String)</b> name of class. If used, requires packagename to be useful (optional)
+<br><b>flags (Integer)</b> Intent flags (optional)
+<br><b>returns: (Intent)</b> An object representing an Intent
+</td></tr>
+<tr><td><a name="makeToast"/><b>makeToast</b></td><td>Displays a short-duration Toast notification.
+<br><b>message (String)</b> 
+</td></tr>
+<tr><td><a name="notify"/><b>notify</b></td><td>Displays a notification that will be canceled when the user clicks on it.
+<br><b>title (String)</b> title
+<br><b>message (String)</b> 
+</td></tr>
+<tr><td><a name="requiredVersion"/><b>requiredVersion</b></td><td>Checks if version of SL4A is greater than or equal to the specified version.
+<br><b>requiredVersion (Integer)</b> 
+</td></tr>
+<tr><td><a name="sendBroadcast"/><b>sendBroadcast</b></td><td>Send a broadcast.
+<br><b>action (String)</b> 
+<br><b>uri (String)</b>  (optional)
+<br><b>type (String)</b> MIME type/subtype of the URI (optional)
+<br><b>extras (JSONObject)</b> a Map of extras to add to the Intent (optional)
+<br><b>packagename (String)</b> name of package. If used, requires classname to be useful (optional)
+<br><b>classname (String)</b> name of class. If used, requires packagename to be useful (optional)
+</td></tr>
+<tr><td><a name="sendBroadcastIntent"/><b>sendBroadcastIntent</b></td><td>Send Broadcast Intent
+<br><b>intent (Intent)</b> Intent in the format as returned from makeIntent
+</td></tr>
+<tr><td><a name="sendEmail"/><b>sendEmail</b></td><td>Launches an activity that sends an e-mail message to a given recipient.
+<br><b>to (String)</b> A comma separated list of recipients.
+<br><b>subject (String)</b> 
+<br><b>body (String)</b> 
+<br><b>attachmentUri (String)</b>  (optional)
+</td></tr>
+<tr><td><a name="setClipboard"/><b>setClipboard</b></td><td>Put text in the clipboard.
+<br><b>text (String)</b> 
+<br>Creates a new AndroidFacade that simplifies the interface to various Android APIs.
+</td></tr>
+<tr><td><a name="startActivity"/><b>startActivity</b></td><td>Starts an activity.
+<br><b>action (String)</b> 
+<br><b>uri (String)</b>  (optional)
+<br><b>type (String)</b> MIME type/subtype of the URI (optional)
+<br><b>extras (JSONObject)</b> a Map of extras to add to the Intent (optional)
+<br><b>wait (Boolean)</b> block until the user exits the started activity (optional)
+<br><b>packagename (String)</b> name of package. If used, requires classname to be useful (optional)
+<br><b>classname (String)</b> name of class. If used, requires packagename to be useful (optional)
+<br>packagename and classname, if provided, are used in a 'setComponent' call.
+</td></tr>
+<tr><td><a name="startActivityForResult"/><b>startActivityForResult</b></td><td>Starts an activity and returns the result.
+<br><b>action (String)</b> 
+<br><b>uri (String)</b>  (optional)
+<br><b>type (String)</b> MIME type/subtype of the URI (optional)
+<br><b>extras (JSONObject)</b> a Map of extras to add to the Intent (optional)
+<br><b>packagename (String)</b> name of package. If used, requires classname to be useful (optional)
+<br><b>classname (String)</b> name of class. If used, requires packagename to be useful (optional)
+<br><b>returns: (Intent)</b> A Map representation of the result Intent.
+</td></tr>
+<tr><td><a name="startActivityForResultIntent"/><b>startActivityForResultIntent</b></td><td>Starts an activity and returns the result.
+<br><b>intent (Intent)</b> Intent in the format as returned from makeIntent
+<br><b>returns: (Intent)</b> A Map representation of the result Intent.
+</td></tr>
+<tr><td><a name="startActivityIntent"/><b>startActivityIntent</b></td><td>Start Activity using Intent
+<br><b>intent (Intent)</b> Intent in the format as returned from makeIntent
+<br><b>wait (Boolean)</b> block until the user exits the started activity (optional)
+</td></tr>
+<tr><td><a name="vibrate"/><b>vibrate</b></td><td>Vibrates the phone or a specified duration in milliseconds.
+<br><b>duration (Integer)</b> duration in milliseconds (default=300)
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

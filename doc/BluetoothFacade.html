@@ -1,0 +1,80 @@
+<html><head><title>SL4A API Help -BluetoothFacade</title></head>
+<body>
+<h1>SL4A API Help -BluetoothFacade</h1>
+<a href="index.html">index</a><br>
+Bluetooth functions.
+<br><i>Min SDK level=5</i>
+<table border=1>
+<tr><td><a name="bluetoothAccept"/><b>bluetoothAccept</b></td><td>Listens for and accepts a Bluetooth connection. Blocks until the connection is established or fails.
+<br><b>uuid (String)</b>  (default=457807c0-4897-11df-9879-0800200c9a66)
+<br><b>timeout (Integer)</b> How long to wait for a new connection, 0 is wait for ever (default=0)
+</td></tr>
+<tr><td><a name="bluetoothActiveConnections"/><b>bluetoothActiveConnections</b></td><td>Returns active Bluetooth connections.
+</td></tr>
+<tr><td><a name="bluetoothConnect"/><b>bluetoothConnect</b></td><td>Connect to a device over Bluetooth. Blocks until the connection is established or fails.
+<br><b>uuid (String)</b> The UUID passed here must match the UUID used by the server device. (default=457807c0-4897-11df-9879-0800200c9a66)
+<br><b>address (String)</b> The user will be presented with a list of discovered devices to choose from if an address is not provided. (optional)
+<br><b>returns: (String)</b> True if the connection was established successfully.
+</td></tr>
+<tr><td><a name="bluetoothDiscoveryCancel"/><b>bluetoothDiscoveryCancel</b></td><td>Cancel the current device discovery process.
+<br><b>returns: (Boolean)</b> true on success, false on error
+</td></tr>
+<tr><td><a name="bluetoothDiscoveryStart"/><b>bluetoothDiscoveryStart</b></td><td>Start the remote device discovery process. 
+<br><b>returns: (Boolean)</b> true on success, false on error
+</td></tr>
+<tr><td><a name="bluetoothGetConnectedDeviceName"/><b>bluetoothGetConnectedDeviceName</b></td><td>Returns the name of the connected device.
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="bluetoothGetLocalAddress"/><b>bluetoothGetLocalAddress</b></td><td>Returns the hardware address of the local Bluetooth adapter. 
+</td></tr>
+<tr><td><a name="bluetoothGetLocalName"/><b>bluetoothGetLocalName</b></td><td>Gets the Bluetooth Visible device name
+</td></tr>
+<tr><td><a name="bluetoothGetRemoteDeviceName"/><b>bluetoothGetRemoteDeviceName</b></td><td>Queries a remote device for it\'s name or null if it can\'t be resolved
+<br><b>address (String)</b> Bluetooth Address For Target Device
+</td></tr>
+<tr><td><a name="bluetoothGetScanMode"/><b>bluetoothGetScanMode</b></td><td>Gets the scan mode for the local dongle.\r<br>Return values:\r<br>\t-1 when Bluetooth is disabled.\r<br>\t0 if non discoverable and non connectable.\r<br>\r1 connectable non discoverable.\r3 connectable and discoverable.
+</td></tr>
+<tr><td><a name="bluetoothIsDiscovering"/><b>bluetoothIsDiscovering</b></td><td>Return true if the local Bluetooth adapter is currently in the device discovery process. 
+</td></tr>
+<tr><td><a name="bluetoothMakeDiscoverable"/><b>bluetoothMakeDiscoverable</b></td><td>Requests that the device be discoverable for Bluetooth connections.
+<br><b>duration (Integer)</b> period of time, in seconds, during which the device should be discoverable (default=300)
+</td></tr>
+<tr><td><a name="bluetoothRead"/><b>bluetoothRead</b></td><td>Read up to bufferSize ASCII characters.
+<br><b>bufferSize (Integer)</b>  (default=4096)
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="bluetoothReadBinary"/><b>bluetoothReadBinary</b></td><td>Read up to bufferSize bytes and return a chunked, base64 encoded string.
+<br><b>bufferSize (Integer)</b>  (default=4096)
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="bluetoothReadLine"/><b>bluetoothReadLine</b></td><td>Read the next line.
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="bluetoothReadReady"/><b>bluetoothReadReady</b></td><td>Returns True if the next read is guaranteed not to block.
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="bluetoothSetLocalName"/><b>bluetoothSetLocalName</b></td><td>Sets the Bluetooth Visible device name, returns True on success
+<br><b>name (String)</b> New local name
+</td></tr>
+<tr><td><a name="bluetoothStop"/><b>bluetoothStop</b></td><td>Stops Bluetooth connection.
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="bluetoothWrite"/><b>bluetoothWrite</b></td><td>Sends ASCII characters over the currently open Bluetooth connection.
+<br><b>ascii (String)</b> 
+<br><b>connID (String)</b> Connection id (default=)
+</td></tr>
+<tr><td><a name="bluetoothWriteBinary"/><b>bluetoothWriteBinary</b></td><td>Send bytes over the currently open Bluetooth connection.
+<br><b>base64 (String)</b> A base64 encoded String of the bytes to be sent.
+<br><b>connID (String)</b> Connection id (optional) (default=)
+</td></tr>
+<tr><td><a name="checkBluetoothState"/><b>checkBluetoothState</b></td><td>Checks Bluetooth state.
+<br><b>returns: (Boolean)</b> True if Bluetooth is enabled.
+</td></tr>
+<tr><td><a name="toggleBluetoothState"/><b>toggleBluetoothState</b></td><td>Toggle Bluetooth on and off.
+<br><b>enabled (Boolean)</b>  (optional)
+<br><b>prompt (Boolean)</b> Prompt the user to confirm changing the Bluetooth state. (default=true)
+<br><b>returns: (Boolean)</b> True if Bluetooth is enabled.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

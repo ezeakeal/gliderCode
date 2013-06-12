@@ -1,0 +1,96 @@
+<html><head><title>SL4A API Help -SensorManagerFacade</title></head>
+<body>
+<h1>SL4A API Help -SensorManagerFacade</h1>
+<a href="index.html">index</a><br>
+Exposes the SensorManager related functionality. <br>
+ <br>
+ <b>Guidance notes</b> <br>
+ For reasons of economy the sensors on smart phones are usually low cost and, therefore, low
+ accuracy (usually represented by 10 bit data). The floating point data values obtained from
+ sensor readings have up to 16 decimal places, the majority of which are noise. On many phones the
+ accelerometer is limited (by the phone manufacturer) to a maximum reading of 2g. The magnetometer
+ (which also provides orientation readings) is strongly affected by the presence of ferrous metals
+ and can give large errors in vehicles, on board ship etc.
+ 
+ Following a startSensingTimed(A,B) api call sensor events are entered into the Event Queue (see
+ EventFacade). For the A parameter: 1 = All Sensors, 2 = Accelerometer, 3 = Magnetometer and 4 =
+ Light. The B parameter is the minimum delay between recordings in milliseconds. To avoid
+ duplicate readings the minimum delay should be 20 milliseconds. The light sensor will probably be
+ much slower (taking about 1 second to register a change in light level). Note that if the light
+ level is constant no sensor events will be registered by the light sensor.
+ 
+ Following a startSensingThreshold(A,B,C) api call sensor events greater than a given threshold
+ are entered into the Event Queue. For the A parameter: 1 = Orientation, 2 = Accelerometer, 3 =
+ Magnetometer and 4 = Light. The B parameter is the integer value of the required threshold level.
+ For orientation sensing the integer threshold value is in milliradians. Since orientation events
+ can exceed the threshold value for long periods only crossing and return events are recorded. The
+ C parameter is the required axis (XYZ) of the sensor: 0 = No axis, 1 = X, 2 = Y, 3 = X+Y, 4 = Z,
+ 5= X+Z, 6 = Y+Z, 7 = X+Y+Z. For orientation X = azimuth, Y = pitch and Z = roll. <br>
+ 
+ <br>
+ <b>Example (python)</b>
+ 
+ <pre>
+ import android, time
+ droid = android.Android()
+ droid.startSensingTimed(1, 250)
+ time.sleep(1)
+ s1 = droid.readSensors().result
+ s2 = droid.sensorsGetAccuracy().result
+ s3 = droid.sensorsGetLight().result
+ s4 = droid.sensorsReadAccelerometer().result
+ s5 = droid.sensorsReadMagnetometer().result
+ s6 = droid.sensorsReadOrientation().result
+ droid.stopSensing()
+ </pre>
+ 
+ Returns:<br>
+ s1 = {u'accuracy': 3, u'pitch': -0.47323511242866517, u'xmag': 1.75, u'azimuth':
+ -0.26701245009899138, u'zforce': 8.4718560000000007, u'yforce': 4.2495484000000001, u'time':
+ 1297160391.2820001, u'ymag': -8.9375, u'zmag': -41.0625, u'roll': -0.031366908922791481,
+ u'xforce': 0.23154590999999999}<br>
+ s2 = 3 (Highest accuracy)<br>
+ s3 = None ---(not available on many phones)<br>
+ s4 = [0.23154590999999999, 4.2495484000000001, 8.4718560000000007] ----(x, y, z accelerations)<br>
+ s5 = [1.75, -8.9375, -41.0625] -----(x, y, z magnetic readings)<br>
+ s6 = [-0.26701245009899138, -0.47323511242866517, -0.031366908922791481] ---(azimuth, pitch, roll
+ in radians)<br>
+<br>@author Damon Kohler (damonkohler@gmail.com)
+<br>@author Felix Arends (felix.arends@gmail.com)
+<br>@author Alexey Reznichenko (alexey.reznichenko@gmail.com)
+<br>@author Robbie Mathews (rjmatthews62@gmail.com)
+<br>@author John Karwatzki (jokar49@gmail.com)
+<table border=1>
+<tr><td><a name="readSensors"/><b>readSensors</b></td><td>Returns the most recently recorded sensor data.
+</td></tr>
+<tr><td><a name="sensorsGetAccuracy"/><b>sensorsGetAccuracy</b></td><td>Returns the most recently received accuracy value.
+</td></tr>
+<tr><td><a name="sensorsGetLight"/><b>sensorsGetLight</b></td><td>Returns the most recently received light value.
+</td></tr>
+<tr><td><a name="sensorsReadAccelerometer"/><b>sensorsReadAccelerometer</b></td><td>Returns the most recently received accelerometer values.
+<br><b>returns: (List)</b> a List of Floats [(acceleration on the) X axis, Y axis, Z axis].
+</td></tr>
+<tr><td><a name="sensorsReadMagnetometer"/><b>sensorsReadMagnetometer</b></td><td>Returns the most recently received magnetic field values.
+<br><b>returns: (List)</b> a List of Floats [(magnetic field value for) X axis, Y axis, Z axis].
+</td></tr>
+<tr><td><a name="sensorsReadOrientation"/><b>sensorsReadOrientation</b></td><td>Returns the most recently received orientation values.
+<br><b>returns: (List)</b> a List of Doubles [azimuth, pitch, roll].
+</td></tr>
+<tr><td><a name="startSensing"/><b>startSensing</b></td><td>Starts recording sensor data to be available for polling.
+<br><b>sampleSize (Integer)</b> number of samples for calculating average readings (default=5)
+<br><i>Deprecated in 4. Use startSensingTimed or startSensingThreshhold instead.</i>
+</td></tr>
+<tr><td><a name="startSensingThreshold"/><b>startSensingThreshold</b></td><td>Records to the Event Queue sensor data exceeding a chosen threshold.
+<br><b>sensorNumber (Integer)</b> 1 = Orientation, 2 = Accelerometer, 3 = Magnetometer and 4 = Light
+<br><b>threshold (Integer)</b> Threshold level for chosen sensor (integer)
+<br><b>axis (Integer)</b> 0 = No axis, 1 = X, 2 = Y, 3 = X+Y, 4 = Z, 5= X+Z, 6 = Y+Z, 7 = X+Y+Z
+</td></tr>
+<tr><td><a name="startSensingTimed"/><b>startSensingTimed</b></td><td>Starts recording sensor data to be available for polling.
+<br><b>sensorNumber (Integer)</b> 1 = All, 2 = Accelerometer, 3 = Magnetometer and 4 = Light
+<br><b>delayTime (Integer)</b> Minimum time between readings in milliseconds
+</td></tr>
+<tr><td><a name="stopSensing"/><b>stopSensing</b></td><td>Stops collecting sensor data.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

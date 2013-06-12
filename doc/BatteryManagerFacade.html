@@ -1,0 +1,41 @@
+<html><head><title>SL4A API Help -BatteryManagerFacade</title></head>
+<body>
+<h1>SL4A API Help -BatteryManagerFacade</h1>
+<a href="index.html">index</a><br>
+Exposes Batterymanager API. Note that in order to use any of the batteryGet* functions, you need
+ to batteryStartMonitoring, and then wait for a "battery" event. Sleeping for a second will
+ usually work just as well.
+<br>@author Alexey Reznichenko (alexey.reznichenko@gmail.com)
+<br>@author Robbie Matthews (rjmatthews62@gmail.com)
+<table border=1>
+<tr><td><a name="batteryCheckPresent"/><b>batteryCheckPresent</b></td><td>Returns the most recently received battery presence data.
+<br><i>Min SDK level=5</i>
+</td></tr>
+<tr><td><a name="batteryGetHealth"/><b>batteryGetHealth</b></td><td>Returns the most recently received battery health data:<br>1 - unknown;<br>2 - good;<br>3 - overheat;<br>4 - dead;<br>5 - over voltage;<br>6 - unspecified failure;
+</td></tr>
+<tr><td><a name="batteryGetLevel"/><b>batteryGetLevel</b></td><td>Returns the most recently received battery level (percentage).
+<br><i>Min SDK level=5</i>
+</td></tr>
+<tr><td><a name="batteryGetPlugType"/><b>batteryGetPlugType</b></td><td>Returns the most recently received plug type data:<br>-1 - unknown<br>0 - unplugged;<br>1 - power source is an AC charger<br>2 - power source is a USB port
+</td></tr>
+<tr><td><a name="batteryGetStatus"/><b>batteryGetStatus</b></td><td>Returns  the most recently received battery status data:<br>1 - unknown;<br>2 - charging;<br>3 - discharging;<br>4 - not charging;<br>5 - full;
+</td></tr>
+<tr><td><a name="batteryGetTechnology"/><b>batteryGetTechnology</b></td><td>Returns the most recently received battery technology data.
+<br><i>Min SDK level=5</i>
+</td></tr>
+<tr><td><a name="batteryGetTemperature"/><b>batteryGetTemperature</b></td><td>Returns the most recently received battery temperature.
+<br><i>Min SDK level=5</i>
+</td></tr>
+<tr><td><a name="batteryGetVoltage"/><b>batteryGetVoltage</b></td><td>Returns the most recently received battery voltage.
+<br><i>Min SDK level=5</i>
+</td></tr>
+<tr><td><a name="batteryStartMonitoring"/><b>batteryStartMonitoring</b></td><td>Starts tracking battery state.
+<br>throws "battery" events
+</td></tr>
+<tr><td><a name="batteryStopMonitoring"/><b>batteryStopMonitoring</b></td><td>Stops tracking battery state.
+</td></tr>
+<tr><td><a name="readBatteryData"/><b>readBatteryData</b></td><td>Returns the most recently recorded battery data.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

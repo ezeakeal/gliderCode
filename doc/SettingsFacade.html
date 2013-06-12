@@ -1,0 +1,64 @@
+<html><head><title>SL4A API Help -SettingsFacade</title></head>
+<body>
+<h1>SL4A API Help -SettingsFacade</h1>
+<a href="index.html">index</a><br>
+Exposes phone settings functionality.
+<br>@author Frank Spychalski (frank.spychalski@gmail.com)
+<table border=1>
+<tr><td><a name="checkAirplaneMode"/><b>checkAirplaneMode</b></td><td>Checks the airplane mode setting.
+<br><b>returns: (Boolean)</b> True if airplane mode is enabled.
+</td></tr>
+<tr><td><a name="checkRingerSilentMode"/><b>checkRingerSilentMode</b></td><td>Checks the ringer silent mode setting.
+<br><b>returns: (Boolean)</b> True if ringer silent mode is enabled.
+</td></tr>
+<tr><td><a name="checkScreenOn"/><b>checkScreenOn</b></td><td>Checks if the screen is on or off (requires API level 7).
+<br><b>returns: (Boolean)</b> True if the screen is currently on.
+</td></tr>
+<tr><td><a name="getMaxMediaVolume"/><b>getMaxMediaVolume</b></td><td>Returns the maximum media volume.
+</td></tr>
+<tr><td><a name="getMaxRingerVolume"/><b>getMaxRingerVolume</b></td><td>Returns the maximum ringer volume.
+</td></tr>
+<tr><td><a name="getMediaVolume"/><b>getMediaVolume</b></td><td>Returns the current media volume.
+</td></tr>
+<tr><td><a name="getRingerVolume"/><b>getRingerVolume</b></td><td>Returns the current ringer volume.
+</td></tr>
+<tr><td><a name="getScreenBrightness"/><b>getScreenBrightness</b></td><td>Returns the screen backlight brightness.
+<br><b>returns: (Integer)</b> the current screen brightness between 0 and 255
+</td></tr>
+<tr><td><a name="getScreenTimeout"/><b>getScreenTimeout</b></td><td>Returns the current screen timeout in seconds.
+<br><b>returns: (Integer)</b> the current screen timeout in seconds.
+</td></tr>
+<tr><td><a name="getVibrateMode"/><b>getVibrateMode</b></td><td>Checks Vibration setting. If ringer=true then query Ringer setting, else query Notification setting
+<br><b>ringer (Boolean)</b>  (optional)
+<br><b>returns: (Boolean)</b> True if vibrate mode is enabled.
+</td></tr>
+<tr><td><a name="setMediaVolume"/><b>setMediaVolume</b></td><td>Sets the media volume.
+<br><b>volume (Integer)</b> 
+</td></tr>
+<tr><td><a name="setRingerVolume"/><b>setRingerVolume</b></td><td>Sets the ringer volume.
+<br><b>volume (Integer)</b> 
+</td></tr>
+<tr><td><a name="setScreenBrightness"/><b>setScreenBrightness</b></td><td>Sets the the screen backlight brightness.
+<br><b>value (Integer)</b> brightness value between 0 and 255
+<br><b>returns: (Integer)</b> the original screen brightness.
+</td></tr>
+<tr><td><a name="setScreenTimeout"/><b>setScreenTimeout</b></td><td>Sets the screen timeout to this number of seconds.
+<br><b>value (Integer)</b> 
+<br><b>returns: (Integer)</b> The original screen timeout.
+</td></tr>
+<tr><td><a name="toggleAirplaneMode"/><b>toggleAirplaneMode</b></td><td>Toggles airplane mode on and off.
+<br><b>enabled (Boolean)</b>  (optional)
+<br><b>returns: (Boolean)</b> True if airplane mode is enabled.
+</td></tr>
+<tr><td><a name="toggleRingerSilentMode"/><b>toggleRingerSilentMode</b></td><td>Toggles ringer silent mode on and off.
+<br><b>enabled (Boolean)</b>  (optional)
+<br><b>returns: (Boolean)</b> True if ringer silent mode is enabled.
+</td></tr>
+<tr><td><a name="toggleVibrateMode"/><b>toggleVibrateMode</b></td><td>Toggles vibrate mode on and off. If ringer=true then set Ringer setting, else set Notification setting
+<br><b>enabled (Boolean)</b>  (optional)
+<br><b>ringer (Boolean)</b>  (optional)
+<br><b>returns: (Boolean)</b> True if vibrate mode is enabled.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

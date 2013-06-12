@@ -1,0 +1,290 @@
+<html><head><title>SL4A API Help -UiFacade</title></head>
+<body>
+<h1>SL4A API Help -UiFacade</h1>
+<a href="index.html">index</a><br>
+User Interface Facade. <br>
+ <br>
+ <b>Usage Notes</b><br>
+ <br>
+ The UI facade provides access to a selection of dialog boxes for general user interaction, and
+ also hosts the <a href="#webViewShow">webViewShow</a> call which allows interactive use of html pages.<br>
+ The general use of the dialog functions is as follows:<br>
+ <ol>
+ <li>Create a dialog using one of the following calls:
+ <ul>
+ <li><a href="#dialogCreateInput">dialogCreateInput</a>
+ <li><a href="#dialogCreateAlert">dialogCreateAlert</a>
+ <li><a href="#dialogCreateDatePicker">dialogCreateDatePicker</a>
+ <li><a href="#dialogCreateHorizontalProgress">dialogCreateHorizontalProgress</a>
+ <li><a href="#dialogCreatePassword">dialogCreatePassword</a>
+ <li><a href="#dialogCreateSeekBar">dialogCreateSeekBar</a>
+ <li><a href="#dialogCreateSpinnerProgress">dialogCreateSpinnerProgress</a>
+ </ul>
+ <li>Set additional features to your dialog
+ <ul>
+ <li><a href="#dialogSetItems">dialogSetItems</a> Set a list of items. Used like a menu.
+ <li><a href="#dialogSetMultiChoiceItems">dialogSetMultiChoiceItems</a> Set a multichoice list of items.
+ <li><a href="#dialogSetSingleChoiceItems">dialogSetSingleChoiceItems</a> Set a single choice list of items.
+ <li><a href="#dialogSetPositiveButtonText">dialogSetPositiveButtonText</a>
+ <li><a href="#dialogSetNeutralButtonText">dialogSetNeutralButtonText</a>
+ <li><a href="#dialogSetNegativeButtonText">dialogSetNegativeButtonText</a>
+ <li><a href="#dialogSetMaxProgress">dialogSetMaxProgress</a> Set max progress for your progress bar.
+ </ul>
+ <li>Display the dialog using <a href="#dialogShow">dialogShow</a>
+ <li>Update dialog information if needed
+ <ul>
+ <li><a href="#dialogSetCurrentProgress">dialogSetCurrentProgress</a>
+ </ul>
+ <li>Get the results
+ <ul>
+ <li>Using <a href="#dialogGetResponse">dialogGetResponse</a>, which will wait until the user performs an action to close
+ the dialog box, or
+ <li>Use eventPoll to wait for a "dialog" event.
+ <li>You can find out which list items were selected using <a href="#dialogGetSelectedItems">dialogGetSelectedItems</a>, which
+ returns an array of numeric indices to your list. For a single choice list, there will only ever
+ be one of these.
+ </ul>
+ <li>Once done, use <a href="#dialogDismiss">dialogDismiss</a> to remove the dialog.
+ </ol>
+ <br>
+ You can also manipulate menu options. The menu options are available for both <a href="#dialogShow">dialogShow</a>
+ and <a href="#fullShow">fullShow</a>.
+ <ul>
+ <li><a href="#clearOptionsMenu">clearOptionsMenu</a>
+ <li><a href="#addOptionsMenuItem">addOptionsMenuItem</a>
+ </ul>
+ <br>
+ <b>Some notes:</b><br>
+ Not every dialogSet function is relevant to every dialog type, ie, dialogSetMaxProgress obviously
+ only applies to dialogs created with a progress bar. Also, an Alert Dialog may have a message or
+ items, not both. If you set both, items will take priority.<br>
+ In addition to the above functions, <a href="#dialogGetInput">dialogGetInput</a> and <a href="#dialogGetPassword">dialogGetPassword</a> are
+ convenience functions that create, display and return the relevant dialogs in one call.<br>
+ There is only ever one instance of a dialog. Any dialogCreate call will cause the existing dialog
+ to be destroyed.
+<br>@author MeanEYE.rcf (meaneye.rcf@gmail.com)
+<table border=1>
+<tr><td><a name="addContextMenuItem"/><b>addContextMenuItem</b></td><td>Adds a new item to context menu.
+<br><b>label (String)</b> label for this menu item
+<br><b>event (String)</b> event that will be generated on menu item click
+<br><b>eventData (Object)</b>  (optional)
+<br>Context menus are used primarily with <a href="#webViewShow">webViewShow</a>
+</td></tr>
+<tr><td><a name="addOptionsMenuItem"/><b>addOptionsMenuItem</b></td><td>Adds a new item to options menu.
+<br><b>label (String)</b> label for this menu item
+<br><b>event (String)</b> event that will be generated on menu item click
+<br><b>eventData (Object)</b>  (optional)
+<br><b>iconName (String)</b> Android system menu icon, see http://developer.android.com/reference/android/R.drawable.html (optional)
+<br><b>Example (python)</b>
+ 
+ <pre>
+ import android
+ droid=android.Android()
+ 
+ droid.addOptionsMenuItem("Silly","silly",None,"star_on")
+ droid.addOptionsMenuItem("Sensible","sensible","I bet.","star_off")
+ droid.addOptionsMenuItem("Off","off",None,"ic_menu_revert")
+ 
+ print "Hit menu to see extra options."
+ print "Will timeout in 10 seconds if you hit nothing."
+ 
+ while True: # Wait for events from the menu.
+   response=droid.eventWait(10000).result
+   if response==None:
+     break
+   print response
+   if response["name"]=="off":
+     break
+ print "And done."
+ 
+ </pre>
+</td></tr>
+<tr><td><a name="clearContextMenu"/><b>clearContextMenu</b></td><td>Removes all items previously added to context menu.
+</td></tr>
+<tr><td><a name="clearOptionsMenu"/><b>clearOptionsMenu</b></td><td>Removes all items previously added to options menu.
+</td></tr>
+<tr><td><a name="dialogCreateAlert"/><b>dialogCreateAlert</b></td><td>Create alert dialog.
+<br><b>title (String)</b>  (optional)
+<br><b>message (String)</b>  (optional)
+<br><b>Example (python)</b>
+ 
+ <pre>
+   import android
+   droid=android.Android()
+   droid.dialogCreateAlert("I like swords.","Do you like swords?")
+   droid.dialogSetPositiveButtonText("Yes")
+   droid.dialogSetNegativeButtonText("No")
+   droid.dialogShow()
+   response=droid.dialogGetResponse().result
+   droid.dialogDismiss()
+   if response.has_key("which"):
+     result=response["which"]
+     if result=="positive":
+       print "Yay! I like swords too!"
+     elif result=="negative":
+       print "Oh. How sad."
+   elif response.has_key("canceled"): # Yes, I know it's mispelled.
+     print "You can't even make up your mind?"
+   else:
+     print "Unknown response=",response
+ 
+   print "Done"
+ </pre>
+</td></tr>
+<tr><td><a name="dialogCreateDatePicker"/><b>dialogCreateDatePicker</b></td><td>Create date picker dialog.
+<br><b>year (Integer)</b>  (default=1970)
+<br><b>month (Integer)</b>  (default=1)
+<br><b>day (Integer)</b>  (default=1)
+</td></tr>
+<tr><td><a name="dialogCreateHorizontalProgress"/><b>dialogCreateHorizontalProgress</b></td><td>Create a horizontal progress dialog.
+<br><b>title (String)</b>  (optional)
+<br><b>message (String)</b>  (optional)
+<br><b>maximum progress (Integer)</b>  (default=100)
+</td></tr>
+<tr><td><a name="dialogCreateInput"/><b>dialogCreateInput</b></td><td>Create a text input dialog.
+<br><b>title (String)</b> title of the input box (default=Value)
+<br><b>message (String)</b> message to display above the input box (default=Please enter value:)
+<br><b>defaultText (String)</b> text to insert into the input box (optional)
+<br><b>inputType (String)</b> type of input data, ie number or text (optional)
+<br>For inputType, see <a
+ href="http://developer.android.com/reference/android/R.styleable.html#TextView_inputType"
+ >InputTypes</a>. Some useful ones are text, number, and textUri. Multiple flags can be
+ supplied, seperated by "|", ie: "textUri|textAutoComplete"
+</td></tr>
+<tr><td><a name="dialogCreatePassword"/><b>dialogCreatePassword</b></td><td>Create a password input dialog.
+<br><b>title (String)</b> title of the input box (default=Password)
+<br><b>message (String)</b> message to display above the input box (default=Please enter password:)
+</td></tr>
+<tr><td><a name="dialogCreateSeekBar"/><b>dialogCreateSeekBar</b></td><td>Create seek bar dialog.
+<br><b>starting value (Integer)</b>  (default=50)
+<br><b>maximum value (Integer)</b>  (default=100)
+<br><b>title (String)</b> 
+<br><b>message (String)</b> 
+<br>Will produce "dialog" events on change, containing:
+ <ul>
+ <li>"progress" - Position chosen, between 0 and max
+ <li>"which" = "seekbar"
+ <li>"fromuser" = true/false change is from user input
+ </ul>
+ Response will contain a "progress" element.
+</td></tr>
+<tr><td><a name="dialogCreateSpinnerProgress"/><b>dialogCreateSpinnerProgress</b></td><td>Create a spinner progress dialog.
+<br><b>title (String)</b>  (optional)
+<br><b>message (String)</b>  (optional)
+<br><b>maximum progress (Integer)</b>  (default=100)
+</td></tr>
+<tr><td><a name="dialogCreateTimePicker"/><b>dialogCreateTimePicker</b></td><td>Create time picker dialog.
+<br><b>hour (Integer)</b>  (default=0)
+<br><b>minute (Integer)</b>  (default=0)
+<br><b>is24hour (Boolean)</b> Use 24 hour clock (default=false)
+</td></tr>
+<tr><td><a name="dialogDismiss"/><b>dialogDismiss</b></td><td>Dismiss dialog.
+</td></tr>
+<tr><td><a name="dialogGetInput"/><b>dialogGetInput</b></td><td>Queries the user for a text input.
+<br><b>title (String)</b> title of the input box (default=Value)
+<br><b>message (String)</b> message to display above the input box (default=Please enter value:)
+<br><b>defaultText (String)</b> text to insert into the input box (optional)
+<br>The result is the user's input, or None (null) if cancel was hit. <br>
+ Example (python)
+ 
+ <pre>
+ import android
+ droid=android.Android()
+ 
+ print droid.dialogGetInput("Title","Message","Default").result
+ </pre>
+</td></tr>
+<tr><td><a name="dialogGetPassword"/><b>dialogGetPassword</b></td><td>Queries the user for a password.
+<br><b>title (String)</b> title of the password box (default=Password)
+<br><b>message (String)</b> message to display above the input box (default=Please enter password:)
+</td></tr>
+<tr><td><a name="dialogGetResponse"/><b>dialogGetResponse</b></td><td>Returns dialog response.
+</td></tr>
+<tr><td><a name="dialogGetSelectedItems"/><b>dialogGetSelectedItems</b></td><td>This method provides list of items user selected.
+<br><b>returns: (Set)</b> Selected items
+</td></tr>
+<tr><td><a name="dialogSetCurrentProgress"/><b>dialogSetCurrentProgress</b></td><td>Set progress dialog current value.
+<br><b>current (Integer)</b> 
+</td></tr>
+<tr><td><a name="dialogSetItems"/><b>dialogSetItems</b></td><td>Set alert dialog list items.
+<br><b>items (JSONArray)</b> 
+<br>This effectively creates list of options. Clicking on an item will immediately return an "item"
+ element, which is the index of the selected item.
+</td></tr>
+<tr><td><a name="dialogSetMaxProgress"/><b>dialogSetMaxProgress</b></td><td>Set progress dialog maximum value.
+<br><b>max (Integer)</b> 
+</td></tr>
+<tr><td><a name="dialogSetMultiChoiceItems"/><b>dialogSetMultiChoiceItems</b></td><td>Set dialog multiple choice items and selection.
+<br><b>items (JSONArray)</b> 
+<br><b>selected (JSONArray)</b> list of selected items (optional)
+<br>This creates a list of check boxes. You can select multiple items out of the list. A response
+ will not be returned until the dialog is closed, either with the Cancel key or a button
+ (positive/negative/neutral). Use <a href="#dialogGetSelectedItems()">dialogGetSelectedItems()</a> to find out what was
+ selected.
+</td></tr>
+<tr><td><a name="dialogSetNegativeButtonText"/><b>dialogSetNegativeButtonText</b></td><td>Set alert dialog button text.
+<br><b>text (String)</b> 
+</td></tr>
+<tr><td><a name="dialogSetNeutralButtonText"/><b>dialogSetNeutralButtonText</b></td><td>Set alert dialog button text.
+<br><b>text (String)</b> 
+</td></tr>
+<tr><td><a name="dialogSetPositiveButtonText"/><b>dialogSetPositiveButtonText</b></td><td>Set alert dialog positive button text.
+<br><b>text (String)</b> 
+</td></tr>
+<tr><td><a name="dialogSetSingleChoiceItems"/><b>dialogSetSingleChoiceItems</b></td><td>Set dialog single choice items and selected item.
+<br><b>items (JSONArray)</b> 
+<br><b>selected (Integer)</b> selected item index (default=0)
+<br>This creates a list of radio buttons. You can select one item out of the list. A response will
+ not be returned until the dialog is closed, either with the Cancel key or a button
+ (positive/negative/neutral). Use <a href="#dialogGetSelectedItems()">dialogGetSelectedItems()</a> to find out what was
+ selected.
+</td></tr>
+<tr><td><a name="dialogShow"/><b>dialogShow</b></td><td>Show dialog.
+</td></tr>
+<tr><td><a name="fullDismiss"/><b>fullDismiss</b></td><td>Dismiss Full Screen.
+</td></tr>
+<tr><td><a name="fullKeyOverride"/><b>fullKeyOverride</b></td><td>Override default key actions
+<br><b>keycodes (JSONArray)</b> List of keycodes to override
+<br><b>enable (Boolean)</b> Turn overriding or off (default=true)
+<br>This will override the default behaviour of keys while in the fullscreen mode. ie:
+ 
+ <pre>
+   droid.fullKeyOverride([24,25],True)
+ </pre>
+ 
+ This will override the default behaviour of the volume keys (codes 24 and 25) so that they do
+ not actually adjust the volume. <br>
+ Returns a list of currently overridden keycodes.
+</td></tr>
+<tr><td><a name="fullQuery"/><b>fullQuery</b></td><td>Get Fullscreen Properties
+</td></tr>
+<tr><td><a name="fullQueryDetail"/><b>fullQueryDetail</b></td><td>Get fullscreen properties for a specific widget
+<br><b>id (String)</b> id of layout widget
+</td></tr>
+<tr><td><a name="fullSetList"/><b>fullSetList</b></td><td>Attach a list to a fullscreen widget
+<br><b>id (String)</b> id of layout widget
+<br><b>list (JSONArray)</b> List to set
+</td></tr>
+<tr><td><a name="fullSetProperty"/><b>fullSetProperty</b></td><td>Set fullscreen widget property
+<br><b>id (String)</b> id of layout widget
+<br><b>property (String)</b> name of property to set
+<br><b>value (String)</b> value to set property to
+</td></tr>
+<tr><td><a name="fullSetTitle"/><b>fullSetTitle</b></td><td>Set the Full Screen Activity Title
+<br><b>title (String)</b> Activity Title
+</td></tr>
+<tr><td><a name="fullShow"/><b>fullShow</b></td><td>Show Full Screen.
+<br><b>layout (String)</b> String containing View layout
+<br><b>title (String)</b> Activity Title (optional)
+<br>See <a href=http://code.google.com/p/android-scripting/wiki/FullScreenUI>wiki page</a> for more
+ detail.
+</td></tr>
+<tr><td><a name="webViewShow"/><b>webViewShow</b></td><td>Display a WebView with the given URL.
+<br><b>url (String)</b> 
+<br><b>wait (Boolean)</b> block until the user exits the WebView (optional)
+<br>See <a href=http://code.google.com/p/android-scripting/wiki/UsingWebView>wiki page</a> for more
+ detail.
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

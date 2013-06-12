@@ -1,0 +1,45 @@
+<html><head><title>SL4A API Help -ContactsFacade</title></head>
+<body>
+<h1>SL4A API Help -ContactsFacade</h1>
+<a href="index.html">index</a><br>
+Provides access to contacts related functionality.
+<br>@author MeanEYE.rcf (meaneye.rcf@gmail.com
+<table border=1>
+<tr><td><a name="contactsGet"/><b>contactsGet</b></td><td>Returns a List of all contacts.
+<br><b>attributes (JSONArray)</b>  (optional)
+<br><b>returns: (List)</b> a List of contacts as Maps
+</td></tr>
+<tr><td><a name="contactsGetAttributes"/><b>contactsGetAttributes</b></td><td>Returns a List of all possible attributes for contacts.
+</td></tr>
+<tr><td><a name="contactsGetById"/><b>contactsGetById</b></td><td>Returns contacts by ID.
+<br><b>id (Integer)</b> 
+<br><b>attributes (JSONArray)</b>  (optional)
+</td></tr>
+<tr><td><a name="contactsGetCount"/><b>contactsGetCount</b></td><td>Returns the number of contacts.
+</td></tr>
+<tr><td><a name="contactsGetIds"/><b>contactsGetIds</b></td><td>Returns a List of all contact IDs.
+</td></tr>
+<tr><td><a name="pickContact"/><b>pickContact</b></td><td>Displays a list of contacts to pick from.
+<br><b>returns: (Intent)</b> A map of result values.
+</td></tr>
+<tr><td><a name="pickPhone"/><b>pickPhone</b></td><td>Displays a list of phone numbers to pick from.
+<br><b>returns: (String)</b> The selected phone number.
+</td></tr>
+<tr><td><a name="queryAttributes"/><b>queryAttributes</b></td><td>Content Resolver Query Attributes
+<br><b>uri (String)</b> The URI, using the content:// scheme, for the content to retrieve.
+<br><b>returns: (JSONArray)</b> a list of available columns for a given content uri
+</td></tr>
+<tr><td><a name="queryContent"/><b>queryContent</b></td><td>Content Resolver Query
+<br><b>uri (String)</b> The URI, using the content:// scheme, for the content to retrieve.
+<br><b>attributes (JSONArray)</b> A list of which columns to return. Passing null will return all columns (optional)
+<br><b>selection (String)</b> A filter declaring which rows to return (optional)
+<br><b>selectionArgs (JSONArray)</b> You may include ?s in selection, which will be replaced by the values from selectionArgs (optional)
+<br><b>order (String)</b> How to order the rows (optional)
+<br><b>returns: (List)</b> result of query as Maps
+<br>Exactly as per <a href=
+ "http://developer.android.com/reference/android/content/ContentResolver.html#query%28android.net.Uri,%20java.lang.String[],%20java.lang.String,%20java.lang.String[],%20java.lang.String%29"
+ >ContentResolver.query</a>
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>

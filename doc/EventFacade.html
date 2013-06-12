@@ -1,0 +1,101 @@
+<html><head><title>SL4A API Help -EventFacade</title></head>
+<body>
+<h1>SL4A API Help -EventFacade</h1>
+<a href="index.html">index</a><br>
+Manage the event queue. <br>
+ <br>
+ <b>Usage Notes:</b><br>
+ EventFacade APIs interact with the Event Queue (a data buffer containing up to 1024 event
+ entries).<br>
+ Events are automatically entered into the Event Queue following API calls such as startSensing()
+ and startLocating().<br>
+ The Event Facade provides control over how events are entered into (and removed from) the Event
+ Queue.<br>
+ The Event Queue provides a useful means of recording background events (such as sensor data) when
+ the phone is busy with foreground activities.
+<br>@author Felix Arends (felix.arends@gmail.com)
+<table border=1>
+<tr><td><a name="eventClearBuffer"/><b>eventClearBuffer</b></td><td>Clears all events from the event buffer.
+<br>Example (python): droid.eventClearBuffer()
+</td></tr>
+<tr><td><a name="eventGetBrodcastCategories"/><b>eventGetBrodcastCategories</b></td><td>Lists all the broadcast signals we are listening for
+</td></tr>
+<tr><td><a name="eventPoll"/><b>eventPoll</b></td><td>Returns and removes the oldest n events (i.e. location or sensor update, etc.) from the event buffer.
+<br><b>number_of_events (Integer)</b>  (default=1)
+<br><b>returns: (List)</b> A List of Maps of event properties.
+<br>Actual data returned in the map will depend on the type of event.
+ 
+ <pre>
+ Example (python):
+     import android, time
+     droid = android.Android()
+     droid.startSensing()
+     time.sleep(1)
+     droid.eventClearBuffer()
+     time.sleep(1)
+     e = eventPoll(1).result
+     event_entry_number = 0
+     x = e[event_entry_ number]['data']['xforce']
+ </pre>
+ 
+ e has the format:<br>
+ [{u'data': {u'accuracy': 0, u'pitch': -0.48766891956329345, u'xmag': -5.6875, u'azimuth':
+ 0.3312483489513397, u'zforce': 8.3492730000000002, u'yforce': 4.5628165999999997, u'time':
+ 1297072704.813, u'ymag': -11.125, u'zmag': -42.375, u'roll': -0.059393649548292161, u'xforce':
+ 0.42223078000000003}, u'name': u'sensors', u'time': 1297072704813000L}]<br>
+ x has the string value of the x force data (0.42223078000000003) at the time of the event
+ entry. </pre>
+</td></tr>
+<tr><td><a name="eventPost"/><b>eventPost</b></td><td>Post an event to the event queue.
+<br><b>name (String)</b> Name of event
+<br><b>data (String)</b> Data contained in event.
+<br><b>enqueue (Boolean)</b> Set to False if you don\'t want your events to be added to the event queue, just dispatched. (optional) (default=false)
+<br><pre>
+ Example:
+   import android
+   from datetime import datetime
+   droid = android.Android()
+   t = datetime.now()
+   droid.eventPost('Some Event', t)
+ </pre>
+</td></tr>
+<tr><td><a name="eventRegisterForBroadcast"/><b>eventRegisterForBroadcast</b></td><td>Registers a listener for a new broadcast signal
+<br><b>category (String)</b> 
+<br><b>enqueue (Boolean)</b> Should this events be added to the event queue or only dispatched (default=true)
+<br>Registers a listener for a new broadcast signal
+</td></tr>
+<tr><td><a name="eventUnregisterForBroadcast"/><b>eventUnregisterForBroadcast</b></td><td>Stop listening for a broadcast signal
+<br><b>category (String)</b> 
+</td></tr>
+<tr><td><a name="eventWait"/><b>eventWait</b></td><td>Blocks until an event occurs. The returned event is removed from the buffer.
+<br><b>timeout (Integer)</b> the maximum time to wait (optional)
+<br><b>returns: (Event)</b> Map of event properties.
+</td></tr>
+<tr><td><a name="eventWaitFor"/><b>eventWaitFor</b></td><td>Blocks until an event with the supplied name occurs. The returned event is not removed from the buffer.
+<br><b>eventName (String)</b> 
+<br><b>timeout (Integer)</b> the maximum time to wait (in ms) (optional)
+<br><b>returns: (Event)</b> Map of event properties.
+</td></tr>
+<tr><td><a name="receiveEvent"/><b>receiveEvent</b></td><td>Returns and removes the oldest event (i.e. location or sensor update, etc.) from the event buffer.
+<br><b>returns: (Event)</b> Map of event properties.
+<br><i>Deprecated in r4. Use eventPoll instead.</i>
+</td></tr>
+<tr><td><a name="rpcPostEvent"/><b>rpcPostEvent</b></td><td>Post an event to the event queue.
+<br><b>name (String)</b> 
+<br><b>data (String)</b> 
+<br><i>Deprecated in r4. Use eventPost instead.</i>
+</td></tr>
+<tr><td><a name="startEventDispatcher"/><b>startEventDispatcher</b></td><td>Opens up a socket where you can read for events posted
+<br><b>port (Integer)</b> Port to use (optional) (default=0)
+</td></tr>
+<tr><td><a name="stopEventDispatcher"/><b>stopEventDispatcher</b></td><td>Stops the event server, you can\'t read in the port anymore
+</td></tr>
+<tr><td><a name="waitForEvent"/><b>waitForEvent</b></td><td>Blocks until an event with the supplied name occurs. The returned event is not removed from the buffer.
+<br><b>eventName (String)</b> 
+<br><b>timeout (Integer)</b> the maximum time to wait (optional)
+<br><b>returns: (Event)</b> Map of event properties.
+<br><i>Deprecated in r4. Use eventWaitFor instead.</i>
+</td></tr>
+</table>
+<br><a href="index.html">index</a><br>
+</body></html>
