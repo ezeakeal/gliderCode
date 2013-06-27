@@ -11,10 +11,11 @@ import bluetooth
 ##########################################
 # GLOBALS
 ##########################################
-SERVOTICK = 0.05
+SERVOTICK = 0.02
 SOCK      = None
 TARGET    = None
 LOG       = logging.getLogger('orbit')
+FAKE      = False
 
 ##########################################
 # FUNCTIONS
@@ -37,6 +38,7 @@ def disconnect():
     
 def sConnect():
   global SOCK
+  if FAKE: return
   disconnect()
   try:
     LOG.debug("Creating Socket")
@@ -48,12 +50,12 @@ def sConnect():
     LOG.critical(e)
     print e
     LOG.critical("Reconnecting in 3 seconds")
-    time.sleep(3)
+    time.sleep(1)
     sConnect()
-
 
 def send(cStr):
   LOG.debug("SENDING: %s" % cStr)
+  if FAKE: return
   try:
     SOCK.sendall("%s;" % cStr)
     dat =  SOCK.recv(1024)
@@ -82,5 +84,6 @@ def sendRadio(rString):
   send("R:%s" % rString)
   
 def stop():
+  if FAKE: return
   SOCK.close()
   LOG.info("Closing Module")
